@@ -4,11 +4,7 @@ import json
 
 app = Flask("Emotion Detection")
 
-@app.route('/')
-def render_index_page():
-    return render_template('index.html')
-
-@app.route('/emotionDetector')
+@app.route("/emotionDetector")
 def emotion_getter():
     text_to_analyze = request.args.get('textToAnalyze')
     my_json = json.loads(emotion_detector(text_to_analyze))
@@ -17,6 +13,10 @@ def emotion_getter():
     {my_json['dominant_emotion']}."
     print(output)
     return output
+
+@app.route("/")
+def render_index_page():
+    return render_template('index.html')
 
 
 if __name__ == "__main__":
